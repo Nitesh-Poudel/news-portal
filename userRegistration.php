@@ -4,7 +4,7 @@ $sqlCreateTable = "
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(20) NOT NULL,
     role VARCHAR(50) NOT NULL,
     password VARCHAR(150) NOT NULL,
     extra VARCHAR(255)
@@ -17,15 +17,15 @@ mysqli_query($con, $sqlCreateTable) or die("Table creation failed: ");
 $msg;
 if (isset($_POST['submit'])) {
     $name = ucwords($_POST['fullname']);
-    $phone = $_POST['phone'];
+    $email = $_POST['email'];
     $role = $_POST['user_type'];
     $password = md5($_POST['password']);
     $cpassword = md5($_POST['cpassword']);
 
-    if ($name!='' && $phone != '' && $role != '' && $password != '' && $cpassword != '') {
+    if ($name!='' && $email != '' && $role != '' && $password != '' && $cpassword != '') {
         if ($cpassword == $password) {
-            $sql = "INSERT INTO users(name, phone, role, password, extra)
-                    VALUES('$name', '$phone', '$role', '$password', '')";
+            $sql = "INSERT INTO users(name, email, role, password, extra)
+                    VALUES('$name', '$email', '$role', '$password', '')";
 
             $qry = mysqli_query($con, $sql) or die("Data insert Error");
             if ($qry) {
@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
             <form action="" name="myform" onsubmit="return validateForm()" method="post">
                 <div class="title">Register</div>
                 <input type="text" placeholder="Full name" class="inputs" name="fullname"  ><br>
-                <input type="tel" placeholder="phone" class="inputs" name="phone" ><br>
+                <input type="email" placeholder="email" class="inputs" name="email" ><br>
                
                 <select name="user_type" class="inputs">
             <option value="" selected disabled id="nullvalue">Register yourself as...</option>

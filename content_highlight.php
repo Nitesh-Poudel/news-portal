@@ -5,7 +5,7 @@ if(isset($_GET['id'])){
     $id = $_GET['id'];
     
    
-    $sql = "SELECT * FROM content INNER JOIN comments ON content.content_id = comments.content_id WHERE content.content_id = $id";
+    $sql = "SELECT * FROM content  WHERE newsid = $id";
     $qry = mysqli_query($con, $sql);
 
     if($qry) {
@@ -54,14 +54,14 @@ if(isset($_GET['id'])){
 ?>
 
 
-<?php
+<?php/*
 
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     
    
-    $sqlcmt = "SELECT * FROM comments  WHERE content_id = $id";
+    $sqlcmt = "SELECT * FROM comments  WHERE newsid = $id";
     $commentss = mysqli_query($con, $sqlcmt);
 
     if($commentss) {
@@ -73,7 +73,7 @@ if(isset($_GET['id'])){
 } else {
     echo 'No ID parameter provided';
 }
-?>
+*/?>
 
 
 
@@ -158,7 +158,7 @@ if(isset($_GET['id'])){
                     if(mysqli_num_rows($comments) > 0){
                         while($data3 = mysqli_fetch_assoc($result)){
                             echo '
-                                <p>'.$data2['name'].''.$data3['comment'].'.</p>
+                                <p>'.$data2['name'].''.$data3['comment'].'.</p> 
                             ';
                         }
                     }

@@ -1,6 +1,27 @@
 <?php
     session_start();
+    $_SESSION['userid'];
     include_once('session.php');
+    include_once ('databaseconnection.php');
+    //create database
+    $sqlCreateTable = "
+CREATE TABLE IF NOT EXISTS content (
+    newsid INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    content  VARCHAR(5000) NOT NULL,
+    imgsrc VARCHAR(150) NOT NULL,
+    createrid VARCHAR(255), NOT NULL,
+    date VARCHAR(100), NOT NULL
+
+)";
+
+
+if(!$sqlCreateTable){
+    echo "Can't create database";
+}
+
+else{
     if(isset($_POST['upload'])){
             
             if(isset($_FILES['image'])){
@@ -10,6 +31,7 @@
                 
                     $extension=pathinfo($imgname, PATHINFO_EXTENSION);
                     $datee=date('Ymdhis');
+                    
                     $replaced = str_replace(' ','a',$datee);
                     $newname='613'.'.'.$replaced.'.'.$extension;
                 
@@ -20,7 +42,7 @@
           
           
           
-            include_once ('databaseconnection.php');
+          
             $title=$_POST['title'];
       
             $category=$_POST['category'];
@@ -33,7 +55,7 @@
           
           
             if($title!=''&&$Date!=''&&$authorid!=''&&$imgsrc!=''&&$category!=''){
-                $sql = "INSERT INTO content(title, category, content, imgsrc, cid, date)
+                $sql = "INSERT INTO content(title, category, content, imgsrc, createrid, date)
                 VALUES ('$title', '$category', '$content', '$newname', '".$_SESSION['userid']."', '$Date')";
         
               
@@ -47,6 +69,7 @@
 
 
     }
+}
 
 ?>
 <!DOCTYPE html>
@@ -55,7 +78,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload_Article</title>
+    <title>Upload_Article<?php echo$_SESSION['user'];?></title>
   
     <style>
        .heading{
@@ -81,6 +104,8 @@
                     <option value="Plolitics">Category 1</option>
                     <option value="Business">Business</option>
                     <option value="Sports">Sports </option>
+                    <option value="Social Issue">Social Issue </option>
+                    <option value="Politices">Politices </option>
                     <option value="Entertainment">Entertainment</option>
                     
                     <option value="Technology">Technology</option>

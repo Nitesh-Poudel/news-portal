@@ -4,14 +4,14 @@
     if(isset($_POST['login'])){
 
         include_once('databaseconnection.php');
-        $phone=$_POST["phone"];
+        $email=$_POST["email"];
         $password=$_POST['password'];
 
 
         $encriptpw=md5($password);
 
         
-        $sql="SELECT * from users WHERE phone='$phone'&& password='$encriptpw'";
+        $sql="SELECT * from users WHERE email='$email'&& password='$encriptpw'";
         
         $qry=mysqli_query($con,$sql);
         if($qry){
@@ -19,8 +19,8 @@
           
            if( $data){
             $_SESSION['user']=$data['name'];
-            $_SESSION['userid']=$data['uid'];
-               header('Location:index.php');
+            $_SESSION['userid']=$data['id'];
+               header('Location:newsupload.php');
            }
 
            else{
@@ -53,7 +53,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login smtgNews</title>
+    <title>Login smtgNews<?php echo $data['name']?></title>
     
     <link rel="stylesheet" href="css/forms.css">
 </head>
@@ -76,7 +76,7 @@
             <form name="myform" onsubmit="return validateForm()" action="" method="Post"  >
                 <div class="title">Login</div>
               
-                <input type="text" placeholder="Phone Number" class="inputs" name="phone" id="phone"><br>
+                <input type="text" placeholder="email" class="inputs" name="email" id="email"><br>
                 <input type="password" placeholder="Password" class="inputs" name="password" id="password"><br>
             
                 <div class="button_sanga">

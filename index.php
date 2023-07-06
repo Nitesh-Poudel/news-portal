@@ -4,7 +4,7 @@
     
 
     $sql='';$result='';$data='';
-    $sql="Select * from content ORDER BY content_id DESC" ;
+    $sql="Select * from content ORDER BY newsid DESC" ;
     $result= mysqli_query($con,$sql);
     $data= mysqli_fetch_assoc($result);
 
@@ -21,14 +21,6 @@
 
    
 }
-    
-   
-
-   
-
-
-   
-    
 ?>
 
 
@@ -121,13 +113,13 @@
                     if(mysqli_num_rows($result) > 0){
                         while($data2 = mysqli_fetch_assoc($result)){
                             echo '
-                                <a href="content_highlight.php?id='.$data2['content_id'].'"><div class="topnews">
+                                <a href="content_highlight.php?id='.$data2['newsid'].'"><div class="topnews">
                                     <div class="topnewsimg">
                                     <img src="newsimage/'.$data2['imgsrc'].'">
                                 </div>
                             </a>
 
-                                <a href="content_highlight.php?id='.$data2['content_id'].'"><div class="topnews_news">
+                                <a href="content_highlight.php?id='.$data2['newsid'].'"><div class="topnews_news">
                                     <div class="heading"><h5>'.$data2['title'].'</h5></div>
                                     <div class="shortly_news">'.$data2['content'].'</div>
                                 </div></a>
