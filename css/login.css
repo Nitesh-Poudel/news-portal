@@ -1,0 +1,144 @@
+*{
+    margin: 0px;
+    padding:0px;
+}
+.container{
+    display: flex;
+    width:100%;
+    height:90vh;
+    background-color: rgb(235, 235, 220);
+    margin-top: 10px;
+    align-content: center;
+}
+
+
+/*Left part of page*/
+.container .left{
+    width:5%;
+
+    border-right: 3px solid rgb(197, 205, 205);
+    
+    background-color: rgb(235, 235, 220);
+}
+
+.container .left .corner{
+    height: 40px;
+    border-bottom:3px solid rgb(190, 203, 203) ;
+}
+
+
+
+
+/*Right part of page*/
+.container .right{
+    width:100%;
+    height:100vh;
+}
+
+.container .right .header{
+    height:40px;
+    width: 100%;
+    border-bottom:3px solid rgb(203, 202, 190) ;
+    display:flex;
+  
+    box-shadow:  1px 1px 3px 1px rgb(178, 197, 210);
+}
+
+
+.container .right .header  a, .container .left.corner{
+    text-decoration: none; 
+ 
+    margin-left: 30px;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    margin-top:5px;
+    margin-bottom: 5px;
+    
+    background-color: rgb(217, 220, 223);
+    border-radius: 3px;
+
+    
+
+}
+
+
+.container .right .info{
+    height:40px;
+    width: 100%;
+    background-color: rgb(247, 246, 241);
+    color: rgb(19, 18, 18);
+    
+    font-size: 19px;
+    box-shadow:  1px 1px 3px 1px rgb(201, 204, 206);
+}
+
+/*form start */
+.formbody{
+    display: flex;
+    width:80%;
+    background-color: rgb(250, 250, 246);
+    height:60vh;
+    position:absolute;
+    top: 22vh;
+    left:13vw;
+    box-shadow:  1px 1px 3px 1px rgb(62, 71, 77);
+   
+}
+.form{
+    position:absolute;
+    top: 12vh;
+    left:2vw;
+    
+
+
+}
+.form .redirectlinks{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.image{
+    position:absolute;
+    top:12px;
+
+    right:12px;
+   
+}
+
+.image img{
+   
+}
+.protalName{
+    font-family:fantasy;
+    font-size: 40px;
+    color: rgb(28, 186, 134);
+    border-bottom: 1px solid gray;
+
+}
+
+input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+  
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  button #fb{
+    background-color: #2d9ce1;
+  }
+  

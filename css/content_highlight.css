@@ -1,0 +1,31 @@
+.commentSection{
+    display:flex;
+    margin-top: 40px;
+}
+
+  
+  .commentSection {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"] {
+   
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button[type="submit"] {
+    background-color: #3636ee;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    flex-shrink: 0;
+  }
+  

@@ -1,0 +1,43 @@
+.head{
+    background-color: rgb(226, 255, 255);
+    position:relative;
+    top:0px;
+    left:0px;
+
+}
+
+.heading{
+    margin-left: 10px;
+    
+}
+.heading h1{
+    font-family:fantasy;
+    font-size: 3vw;
+    color: rgb(28, 186, 134);
+    margin-left: 0px 0px 0px 15px;
+    text-decoration:underline;
+    padding:0;
+}
+
+.head .dateTime{
+    display:flex;
+    justify-content: space-between;
+    background-color: rgb(190, 223, 236);
+    font-size: 10px;
+    color:rgb(45, 42, 42);
+    align-items: center;
+
+    
+}
+.head .dateTime h3{
+    margin:0px 10px 0px 10px;
+}
+.head .dateTime #slogan{
+    color:brown;
+    font-size: 20px;
+}
+.head .border{
+    height:17px;
+    width:100vw;
+    background-color: rgb(20, 20, 21);
+}
