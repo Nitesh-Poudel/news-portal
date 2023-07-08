@@ -1,13 +1,12 @@
 .commentSection{
-    display:flex;
+  
     margin-top: 40px;
 }
 
   
   .commentSection {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 10px;
+  
+   
   }
   
   input[type="text"] {
@@ -28,4 +27,14 @@
     margin-left: 10px;
     flex-shrink: 0;
   }
+
+  .textarea {
+    height: 100px; 
+    width: 100%;/* Adjust the height as needed */
+    resize: vertical; /* Allows vertical resizing */
+}
   
+.comment{
+  display:flex;
+  justify-content: space-around;
+}

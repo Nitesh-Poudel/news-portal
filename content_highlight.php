@@ -2,10 +2,10 @@
  include_once('databaseconnection.php');
 session_start();
 if(isset($_GET['id'])){
-    $id = $_GET['id'];
+    $contentid = $_GET['id'];
     
    
-    $sql = "SELECT * FROM content  WHERE newsid = $id";
+    $sql = "SELECT * FROM content  WHERE newsid = $contentid";
     $qry = mysqli_query($con, $sql);
 
     if($qry) {
@@ -34,10 +34,10 @@ if(isset($_GET['id'])){
                 
                 
                 $Date=date(" Y M d ");
-                $user=$_SESSION['userid'];
+                $time=time();
+                $user=$_SESSION['userid'];;
 
-                $contentid=$result['content_id'];
-                $commentsql="INSERT INTO comments(commenter_id,content_id,comments,date)VALUES('$user','$contentid','$comment','$Date')";
+                $commentsql="INSERT INTO comment(user_id,news_id,comments,date,time)VALUES('$user','$contentid','$comment','$Date',$time)";
                 $commentquery=mysqli_query($con,$commentsql);
 
                 if($commentquery){
@@ -54,26 +54,6 @@ if(isset($_GET['id'])){
 ?>
 
 
-<?php/*
-
-
-if(isset($_GET['id'])){
-    $id = $_GET['id'];
-    
-   
-    $sqlcmt = "SELECT * FROM comments  WHERE newsid = $id";
-    $commentss = mysqli_query($con, $sqlcmt);
-
-    if($commentss) {
-        $comments = mysqli_fetch_assoc($commentss);
-    } else {
-        echo 'Error retrieving content from the database.';
-    }
-    
-} else {
-    echo 'No ID parameter provided';
-}
-*/?>
 
 
 
@@ -94,6 +74,14 @@ if(isset($_GET['id'])){
     <link rel="stylesheet" a href="css/landingCss/content.css">
     <link rel="stylesheet" a href="css/landingCss/dash_left.css">
     <link rel="stylesheet" a href="css/content_highlight.css">
+
+
+    <style>
+        .textarea {
+        height: 300px; /* Adjust the height as needed */
+        resize: vertical; /* Allows vertical resizing */
+}
+    </style>
 </head>
 <body>
 <div class="head">
@@ -127,13 +115,12 @@ if(isset($_GET['id'])){
                
                 <div class="headimg">
                     
-                    <p><img src="Newsimage/<?php echo $result['imgsrc'];?>"<p>
+                   <img src="Newsimage/<?php echo $result['imgsrc'];?>"
                    
                     
                     <p>
-                        <?php 
-                            echo $result['content'];
-                        ?>
+                    <?php echo $result['content'];?>"
+                   
                     </p>
                 </div>
                 
@@ -141,7 +128,8 @@ if(isset($_GET['id'])){
                 <form method="POST" name="commentform">
                     <div class="commentSection">
                         <div class="commentbox">
-                            <input type="text" name="comment_text">
+                        <textarea placeholder="Content" class="inputs textarea" name="content" required></textarea><br>
+               
                         </div>
                         <div class="commentbutton">
                             <button type="submit" name="comment">Comment</button>
@@ -154,15 +142,34 @@ if(isset($_GET['id'])){
 
                 <div class="comment_list">
                     <h1 style="fontsize:26px;">Comments</h1>
-                    <?php
-                    if(mysqli_num_rows($comments) > 0){
-                        while($data3 = mysqli_fetch_assoc($result)){
-                            echo '
-                                <p>'.$data2['name'].''.$data3['comment'].'.</p> 
-                            ';
-                        }
-                    }
-                ?>
+                    <div class="comment_list">
+
+                        <?php
+                            $cmtsql= "SELECT * FROM comment WHERE news_id = $contentid";
+                            $commentQuery = mysqli_query($con,$cmtsql);
+                            if (mysqli_num_rows($commentQuery) > 0) {
+                                while ($commentResult = mysqli_fetch_assoc($commentQuery)) {
+                                    $userId = $commentResult['user_id'];
+                                    $userQuery = mysqli_query($con, "SELECT name FROM users WHERE id = $userId");
+                                    $userResult = mysqli_fetch_assoc($userQuery);
+                                    $comment = $commentResult['comments'];
+                                    $time = $commentResult['time'];
+                                    $formattedTime = date('Y-m-d H:i:s', $time);
+                            ?>
+                                    <div class="comment">
+                                        <div class="cmtr_name"><p><?php echo $userResult['name']; ?></p></div>
+                                        <div class="cmt"><p><?php echo $comment; ?></p></div>
+                                        <div class="cmt_date"><p><?php echo $formattedTime; ?></p></div>
+                                    </div>
+                            <?php
+                                }
+                            } else {
+                                echo "No comments found.";
+                            }
+                        ?>
+                    </div>
+
+                   
                 </div>
             </div>
         
