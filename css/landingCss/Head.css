@@ -1,43 +1,58 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
 .head{
-    background-color: rgb(226, 255, 255);
-    position:relative;
-    top:0px;
-    left:0px;
-
-}
-
-.heading{
-    margin-left: 10px;
-    
-}
-.heading h1{
-    font-family:fantasy;
-    font-size: 3vw;
-    color: rgb(28, 186, 134);
-    margin-left: 0px 0px 0px 15px;
-    text-decoration:underline;
-    padding:0;
-}
-
-.head .dateTime{
+    background-color: rgb(255, 255, 255);
+   color:aliceblue;
     display:flex;
-    justify-content: space-between;
-    background-color: rgb(190, 223, 236);
-    font-size: 10px;
-    color:rgb(45, 42, 42);
+    justify-content:space-between ;
     align-items: center;
+    padding: 20px;
+    
+  
+ 
+}
+.head .heading{
+    border: 0.2px solid gold;
+    border-radius: 20px;
 
+}
+.head .heading {
+    font-size: 2vw;
+    color:rgb(5, 146, 99);
+    font-family:fantasy;
+    text-decoration:underline;
+    text-decoration-color: red;
+    padding:10px;
+    cursor:pointer;
+    -webkit-user-select: none; 
+}
+
+.head .heading #tagline{
+   font-size:20px;
+   text-align: center;
+   color:azure;
+   font-family: 'Times New Roman', Times, serif;
+   text-decoration:none;
+   text-decoration-color: black;
+}
+
+
+
+.links{
+    display: flex;
+    justify-content: space-between;
+}
+
+.links .simplelink{
+    margin:5px;
     
 }
-.head .dateTime h3{
-    margin:0px 10px 0px 10px;
-}
-.head .dateTime #slogan{
-    color:brown;
+
+.links  a{
+    margin:5px;
     font-size: 20px;
-}
-.head .border{
-    height:17px;
-    width:100vw;
-    background-color: rgb(20, 20, 21);
+    
 }

@@ -1,40 +1,36 @@
-.commentSection{
-  
-    margin-top: 40px;
-}
-
-  
-  .commentSection {
-  
+.heading{
+    margin-bottom: 20px;
+   
+  }
+  .mmid{
+    height:100vh;
+    overflow: scroll;
+  }
+  .mmid .heading #content{
+    font-size: 22px;
+    margin-right:10px;
+   
+  }
+  .commentSection .commentbox textarea{
+    margin-top: 30px;
+    width: 90%;
+    display: block;
+    margin-left: auto;
+    border-radius: 10px;
+    margin-right: auto;
+   
    
   }
   
-  input[type="text"] {
-   
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button[type="submit"] {
-    background-color: #3636ee;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 10px;
-    flex-shrink: 0;
+
+  .button{
+    display: flex;
+    margin-left:4vw;
+    
   }
 
-  .textarea {
-    height: 100px; 
-    width: 100%;/* Adjust the height as needed */
-    resize: vertical; /* Allows vertical resizing */
-}
-  
-.comment{
-  display:flex;
-  justify-content: space-around;
-}
+  .button .like{
+    border:1px solid black;
+    background-color: rgb(240, 250, 254);
+    margin-right: 63vw;
+  }

@@ -1,6 +1,7 @@
 <?php 
     session_start();
     include_once('databaseconnection.php');
+   
     
 
     $sql='';$result='';$data='';
@@ -12,7 +13,7 @@
     if(isset($_POST['search'])){
     $newscatagory=$_POST['searchCatagory'];
     if($newscatagory!=''){
-        $sql="Select * from content where category='$newscatagory' ORDER BY content_id DESC" ;
+        $sql="Select * from content where category='$newscatagory' ORDER BY newsid DESC" ;
         $result= mysqli_query($con,$sql);
         $data= mysqli_fetch_assoc($result);
     
@@ -35,26 +36,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>version 1.1</title>
-    <link rel="stylesheet" a href="css/landingCss/master.css">
+
     <link rel="stylesheet" a href="css/landingCss/head.css">
-    <link rel="stylesheet" a href="css/landingCss/container.css">
-    <link rel="stylesheet" a href="css/landingCss/content.css">
-    <link rel="stylesheet" a href="css/landingCss/dash_left.css">
-    <link rel="stylesheet" a href="css/landingCss/topnews.css">
+
+    <link rel="stylesheet" a href="csss/landingCss/content.css">
+
+    <link rel="stylesheet" a href="css/landingCss/Indexnew.css">
+   
 </head>
 <body>
-    <div class="head">
-        <div class="heading">
-            <h1>Somthing.News  </h1>
-            <div class="addpost"><a href="newsupload.php">Upload News</a></div>
-        </div>
-           <div class="dateTime">
-                <div id="date"><h3></h3></div>
-                <div id="slogan"><h3>Stay Ahead with Us</h3></div>
-                <div id="time"><h3></h3></div>
-           </div>
-           <div class="border"></div>
-    </div>
+    <?php include_once('heading.php')?>
+
+
+    
     <div class="container">
         <div class="left">
 
@@ -69,7 +63,8 @@
                    
                     <option value="International">International</option>
                     <option value="Sports">Sports</option>
-                    
+                    <option value="Politices">Politices</option>
+                    <option value="Social Issue">Social Issue</option>
                     <option value="Business">Business</option>
 
                 </select>
@@ -82,49 +77,79 @@
                     
                 
             </form>
+            <div class="tranding-list">
+            <h1>Tranding News</h1>
+
+            <div class="tnews">
+                <div class="t_img">
+                    
+                </div>
+                <div class="tnews">
+                    <?php
+                          $tsql="Select title from content  ORDER BY extra DESC" ;
+                          $tresult= mysqli_query($con,$tsql);
+                          while($tdata=mysqli_fetch_assoc($tresult)){
+                           
+                            echo '<ul type="none">
+                                <li>'.$tdata['title'].'</a><li><ul>
+                            ';
+                          }
+
+                    ?>
+                </div>
+            </div>
+            </div>
+            
+            
             
 
         </div>
         <div class="mid">
-            <div class="lmid">
-                
-            </div>
+            
             <div class="mmid">
-                <a href="<?php echo'content_hightlight.php?id='.$data2['content_id']?>"><div class="heading">
+                <a href="<?php echo'content_highlight.php?id='.$data['newsid']?>">
+                <div class="heading">
                     <h1><?php echo $data['title'];?></h1>
                     <p><?php echo $data['date'];?></p>
                 </div>
-               
+                <div class  ="newscontent">
+                    <h3>
+                        <?php 
+                            echo $data['content'];
+                        ?>
+                    </h3>
+                
                 <div class="headimg">
                     
                     <p><img src="Newsimage/<?php echo $data['imgsrc'];?>"<p>
                    
                     
-                    <p>
-                        <?php 
-                            echo $data['content'];
-                        ?>
-                    </p>
+                   
                 </div></a>
-
+                </div>
 
 
                 <?php
                     if(mysqli_num_rows($result) > 0){
                         while($data2 = mysqli_fetch_assoc($result)){
                             echo '
-                                <a href="content_highlight.php?id='.$data2['newsid'].'"><div class="topnews">
+                            <a href="content_highlight.php?id='.$data2['newsid'].'">
+                                
+                                <div class="topnews">
                                     <div class="topnewsimg">
-                                    <img src="newsimage/'.$data2['imgsrc'].'">
+                                        <img src="newsimage/'.$data2['imgsrc'].'">
+                                    </div>
+                            
+
+                             
+                                <div class="topnews_news">
+                                    <div class="heading"><h5>'.$data2['title'].'</h5></div>
+                                    <div class="shortly_news"><p>'.$data2['content'].'</p></div>
+                                </div>
+                            
+
                                 </div>
                             </a>
-
-                                <a href="content_highlight.php?id='.$data2['newsid'].'"><div class="topnews_news">
-                                    <div class="heading"><h5>'.$data2['title'].'</h5></div>
-                                    <div class="shortly_news">'.$data2['content'].'</div>
-                                </div></a>
-
-                            </div>
                             ';
                         }
                     }
@@ -137,14 +162,10 @@
                 
             </div>
         
-            <div class="rmid">
-                
-            </div>
+            
 
         </div>
-        <div class="right">
-
-        </div>
+       
     </div>
    
 

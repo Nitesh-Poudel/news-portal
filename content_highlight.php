@@ -1,15 +1,27 @@
+
+
 <?php
+ include_once('session.php');
  include_once('databaseconnection.php');
-session_start();
+
+
 if(isset($_GET['id'])){
     $contentid = $_GET['id'];
-    
+
+  
    
     $sql = "SELECT * FROM content  WHERE newsid = $contentid";
     $qry = mysqli_query($con, $sql);
 
     if($qry) {
+
+          
+      
+    
         $result = mysqli_fetch_assoc($qry);
+
+        $trendsql = "UPDATE content SET extra = extra + 1 WHERE newsid = $contentid";
+        $trendqry = mysqli_query($con, $trendsql);
     } else {
         echo 'Error retrieving content from the database.';
     }
@@ -24,31 +36,42 @@ if(isset($_GET['id'])){
 
 
 
-/*comment posting*/
+
 <?php
-    if(isset($_POST['comment'])){
-        $comment=$_POST['comment_text'];
+    if(isset($_POST['cmt'])){
+        $comment=$_POST['comment'];
         if($comment!=''){
-            if($_SESSION['userid']){
+            
                 
                 
                 
                 $Date=date(" Y M d ");
                 $time=time();
-                $user=$_SESSION['userid'];;
+                $user=$_SESSION['userid'];
 
                 $commentsql="INSERT INTO comment(user_id,news_id,comments,date,time)VALUES('$user','$contentid','$comment','$Date',$time)";
                 $commentquery=mysqli_query($con,$commentsql);
 
                 if($commentquery){
-                    echo "Comment sucessful";
+                    $trendsql = "UPDATE content SET extra = extra +3  WHERE newsid = $contentid";
+                    $trendqry = mysqli_query($con, $trendsql);
+              
+                   
                 }
+                else{
+                    echo "Comment unsucess";
                 }
-            }
-            else{
-                header('location:login.php');
-            }
+            
+            
+                
+            
+                
         }
+        else{
+            echo "Enter comment";
+        }
+    
+    }
     
 
 ?>
@@ -70,10 +93,11 @@ if(isset($_GET['id'])){
 
     <link rel="stylesheet" a href="css/landingCss/master.css">
     <link rel="stylesheet" a href="css/landingCss/head.css">
-    <link rel="stylesheet" a href="css/landingCss/container.css">
-    <link rel="stylesheet" a href="css/landingCss/content.css">
+    <link rel="stylesheet" a href="csss/landingCss/container.css">
+    <link rel="stylesheet" a href="csss/landingCss/content.css">
     <link rel="stylesheet" a href="css/landingCss/dash_left.css">
     <link rel="stylesheet" a href="css/content_highlight.css">
+    <link rel="stylesheet" a href="css/landingCss/Indexnew.css">
 
 
     <style>
@@ -84,18 +108,8 @@ if(isset($_GET['id'])){
     </style>
 </head>
 <body>
-<div class="head">
-        <div class="heading">
-            <h1>Somthing.News  </h1>
-            <div class="addpost"><a href="newsupload.php">Upload News</a></div>
-        </div>
-           <div class="dateTime">
-                <div id="date"><h3></h3></div>
-                <div id="slogan"><h3>Stay Ahead with Us</h3></div>
-                <div id="time"><h3></h3></div>
-           </div>
-           <div class="border"></div>
-    </div>
+    <?php include_once('heading.php');?>
+    
     <div class="container">
         <div class="left">
 
@@ -111,28 +125,36 @@ if(isset($_GET['id'])){
                 <div class="heading">
                     <h1><?php echo $result['title'];?></h1>
                     <p><?php echo $result['date'];?></p>
+                    <h3 id="content"><?php echo $result['content'];?>"</h3>
                 </div>
                
                 <div class="headimg">
                     
-                   <img src="Newsimage/<?php echo $result['imgsrc'];?>"
+                   <img src="Newsimage/<?php echo $result['imgsrc'];?>">
                    
-                    
-                    <p>
-                    <?php echo $result['content'];?>"
-                   
-                    </p>
+                  
                 </div>
                 
 
                 <form method="POST" name="commentform">
                     <div class="commentSection">
                         <div class="commentbox">
-                        <textarea placeholder="Content" class="inputs textarea" name="content" required></textarea><br>
+                        <textarea placeholder="Comment" class="inputs textarea" name="comment" required></textarea><br>
                
                         </div>
-                        <div class="commentbutton">
-                            <button type="submit" name="comment">Comment</button>
+                        <div class="button">
+
+                            <div class="like">
+                                <a href="like.php">like</a>
+                            </div>
+
+
+                            <div class="commentbutton">
+                                <button type="submit" name="cmt">Comment</button>
+                            </div>
+
+                          
+
                         </div>
                     </div>
                 </form>

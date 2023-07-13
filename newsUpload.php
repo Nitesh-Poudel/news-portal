@@ -1,7 +1,8 @@
 <?php
-    session_start();
+     include_once('session.php');
+   
     $_SESSION['userid'];
-    include_once('session.php');
+   
     include_once ('databaseconnection.php');
     //create database
     $sqlCreateTable = "
@@ -22,6 +23,8 @@ if(!$sqlCreateTable){
 }
 
 else{
+
+    //to 
     if(isset($_POST['upload'])){
             
             if(isset($_FILES['image'])){
@@ -87,14 +90,15 @@ else{
        }
     </style>
     <link rel="stylesheet"a href="css/newsUpload.css">
-    <link rel="stylesheet"a href="css/head.css">
+    <link rel="stylesheet"a href="css/landingCss/head.css">
 </head>
 
 <body>
+    <?php
+        include_once('heading.php');
+    ?>
     <div class="container">
-    <div class="heading">
-            <h1>Somthing.News</h1>
-        </div>
+    
         <div class="form">
             <form name="myform" method="Post" enctype="multipart/form-data">
                 <div class="title">Upload Your Article</div>
@@ -120,8 +124,7 @@ else{
                     </div>
                    
                 </div>
-                <p id="msg1"><?php echo$title;echo$imgsrc; echo$_SESSION['userid']; echo$date?></p>
-            </form>
+                 </form>
         </div>
     </div>
 </body>

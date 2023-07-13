@@ -20,17 +20,21 @@
            if( $data){
             $_SESSION['user']=$data['name'];
             $_SESSION['userid']=$data['id'];
-               header('Location:newsupload.php');
+               header('Location:index.php');
            }
 
            else{
                 $msg='Phone and password not matched';
            }
+           
 
         }
+
+        
         else{
             $msg='Query not happens';
         }
+
 
     
        
