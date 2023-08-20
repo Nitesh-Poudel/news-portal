@@ -12,15 +12,24 @@
 
         
         $sql="SELECT * from users WHERE email='$email'&& password='$encriptpw'";
-        
+        $msg;
         $qry=mysqli_query($con,$sql);
         if($qry){
            $data= mysqli_fetch_assoc($qry);
           
-           if( $data){
+
+           
+           if( isset($data)){
             $_SESSION['user']=$data['name'];
             $_SESSION['userid']=$data['id'];
-               header('Location:index.php');
+               //header('Location:index.php');
+
+               $cookie_name = "remember_me_cookie";
+               $cookie_value = $_SESSION['userid'];
+               $cookie_expiry = time() + (30 * 24 * 60 * 60); // 30 days from now
+               setcookie($cookie_name, $cookie_value, $cookie_expiry);
+   
+               $msg='Login sucessful';
            }
 
            else{
@@ -30,11 +39,7 @@
 
         }
 
-        
-        else{
-            $msg='Query not happens';
-        }
-
+      
 
     
        
@@ -57,13 +62,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login smtgNews<?php echo $data['name']?></title>
+    <title>Login </title>
     
-    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="cssforms.css">
 </head>
 <style>
     #msg1{
-        font-size:10px;
+        font-size:22px;
         color:red;
     }
 </style>
@@ -88,7 +93,8 @@
                     <div class="link">Don't have an Account? <a href="userregistration.php">Register</a></a></div>
 
                 </div>
-                <p id="msg1"><?php echo$msg;?></p>
+                <p id="msg1"><?php if(isset($msg)){echo $msg;} if(isset($data)) {echo $data['name'];}?></p>
+                <p ><?php echo'sesson id ='.$_SESSION['userid']?>
 
             </form>
         </div>

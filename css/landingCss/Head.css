@@ -9,7 +9,7 @@
     display:flex;
     justify-content:space-between ;
     align-items: center;
-    padding: 20px;
+    padding-left: 20px;
     
   
  
@@ -25,9 +25,9 @@
     font-family:fantasy;
     text-decoration:underline;
     text-decoration-color: red;
-    padding:10px;
-    cursor:pointer;
-    -webkit-user-select: none; 
+    padding-left:10px;
+ 
+  
 }
 
 .head .heading #tagline{
@@ -44,6 +44,10 @@
 .links{
     display: flex;
     justify-content: space-between;
+    border: 3px rgb(158, 138, 138);
+    background-color: rgb(240 240 240);
+    align-items: center;
+    font-style: bold;
 }
 
 .links .simplelink{
@@ -52,7 +56,16 @@
 }
 
 .links  a{
-    margin:5px;
+    margin:25px;
     font-size: 20px;
+    
+}
+.links img{
+    width:80px;
+    height: 80px;
+    border-radius: 50%;
+
+}
+.advancelink{
     
 }

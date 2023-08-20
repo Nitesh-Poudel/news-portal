@@ -10,12 +10,18 @@
     $data= mysqli_fetch_assoc($result);
 
 
-    if(isset($_POST['search'])){
+    if(isset($_POST['searchCatagory'])){
     $newscatagory=$_POST['searchCatagory'];
     if($newscatagory!=''){
-        $sql="Select * from content where category='$newscatagory' ORDER BY newsid DESC" ;
-        $result= mysqli_query($con,$sql);
+        $sql="SELECT * FROM content
+WHERE title LIKE '%$newscatagory'"; 
+ $result= mysqli_query($con,$sql);
         $data= mysqli_fetch_assoc($result);
+
+            if(!$data){
+                $data ="sry no search result found";
+            }
+
     
 
     }
@@ -51,89 +57,85 @@
     
     <div class="container">
         <div class="left">
+            
 
-            <form method="POST" name="search">
-                <div class="searchmenue">
+            <div class="left_container">
+                <form method="POST" name="search">
+                    <div class="searchmenue">
 
-                <select name="searchCatagory" id="searchCatagory">
-                    <option value="">Search.........</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Entertainment">Entertainment</option>
-                    <option value="Health">Health</option>
-                   
-                    <option value="International">International</option>
-                    <option value="Sports">Sports</option>
-                    <option value="Politices">Politices</option>
-                    <option value="Social Issue">Social Issue</option>
-                    <option value="Business">Business</option>
+                    <input type="text" placeholder="Search.." id="search" name="searchCatagory">
 
-                </select>
-                
-               
-                        
-                            <button type="submit" name="search">Search</button>
-                        
-                    </div>
-                    
-                
-            </form>
-            <div class="tranding-list">
-            <h1>Tranding News</h1>
 
-            <div class="tnews">
-                <div class="t_img">
-                    
-                </div>
+
+                                <button type="submit" name="search">Search</button>
+
+                        </div>
+
+
+                </form>
+                <div class="tranding-list">
+                <h1>Tranding News</h1>
+
                 <div class="tnews">
-                    <?php
-                          $tsql="Select title from content  ORDER BY extra DESC" ;
-                          $tresult= mysqli_query($con,$tsql);
-                          while($tdata=mysqli_fetch_assoc($tresult)){
-                           
-                            echo '<ul type="none">
-                                <li>'.$tdata['title'].'</a><li><ul>
-                            ';
-                          }
+                    <div class="t_img">
 
-                    ?>
+                    </div>
+                    <div class="tnews">
+                        <?php
+                              $tsql="Select * from content  ORDER BY extra DESC" ;
+                              $tresult= mysqli_query($con,$tsql);
+                              while($tdata=mysqli_fetch_assoc($tresult)){
+                            
+                                echo '<ul type="none">
+                                <li>
+                                    <a href="content_highlight.php?id=' .$tdata['newsid'] . '">' . $tdata['title'] . '</a>
+                                </li>
+                            </ul>';
+                              }
+
+                        ?>
+                    </div>
                 </div>
-            </div>
+        
             </div>
             
-            
+        </div>
             
 
-        </div>
+    </div>
         <div class="mid">
             
             <div class="mmid">
-                <a href="<?php echo'content_highlight.php?id='.$data['newsid']?>">
-                <div class="heading">
-                    <h1><?php echo $data['title'];?></h1>
-                    <p><?php echo $data['date'];?></p>
-                </div>
-                <div class  ="newscontent">
-                    <h3>
-                        <?php 
-                            echo $data['content'];
-                        ?>
-                    </h3>
                 
-                <div class="headimg">
-                    
-                    <p><img src="Newsimage/<?php echo $data['imgsrc'];?>"<p>
-                   
-                    
-                   
-                </div></a>
-                </div>
+                    <a href="<?php echo'content_highlight.php?id='.$data['newsid']?>">
+                        <div class="heading">
+                            <h1><?php echo $data['title'];?></h1>
+                            <p><?php echo $data['date'];?></p>
+                        </div>
+                        <div class  ="newscontent">
+                            <h3>
+                                <?php 
+                                    echo $data['content'];
+                                ?>
+                            </h3>
+
+                        <div class="headimg">
+
+                            <p><img src="Newsimage/<?php echo $data['imgsrc'];?>"<p>
+
+
+
+                        </div>
+                    </a>
+                
+                
 
 
                 <?php
                     if(mysqli_num_rows($result) > 0){
                         while($data2 = mysqli_fetch_assoc($result)){
                             echo '
-                            <a href="content_highlight.php?id='.$data2['newsid'].'">
+                            <a href="content_highlight.php?id='.$data2['newsid'].'&catagory='.$data2['category'].'">
                                 
                                 <div class="topnews">
                                     <div class="topnewsimg">

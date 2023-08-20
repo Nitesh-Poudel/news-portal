@@ -1,13 +1,13 @@
 
 
 <?php
- include_once('session.php');
+
  include_once('databaseconnection.php');
 
 
 if(isset($_GET['id'])){
     $contentid = $_GET['id'];
-
+    $content_catagory=$_GET['catagory'];
   
    
     $sql = "SELECT * FROM content  WHERE newsid = $contentid";
@@ -39,6 +39,9 @@ if(isset($_GET['id'])){
 
 <?php
     if(isset($_POST['cmt'])){
+        include_once('session.php');
+
+        if(isset($_SESSION['userid'])){
         $comment=$_POST['comment'];
         if($comment!=''){
             
@@ -71,7 +74,7 @@ if(isset($_GET['id'])){
             echo "Enter comment";
         }
     
-    }
+    }}
     
 
 ?>
@@ -104,6 +107,15 @@ if(isset($_GET['id'])){
         .textarea {
         height: 300px; /* Adjust the height as needed */
         resize: vertical; /* Allows vertical resizing */
+        }
+        .mid .heading {
+    display: block;
+    width: 100%;
+    align-items: baseline;
+    text-align: center;
+    margin-right: 20px;
+    border-bottom: 2px solid #ecebeb;
+
 }
     </style>
 </head>
@@ -111,12 +123,56 @@ if(isset($_GET['id'])){
     <?php include_once('heading.php');?>
     
     <div class="container">
+       
         <div class="left">
+            
 
+            <div class="left_container">
+                <form method="POST" name="search">
+                    <div class="searchmenue">
+
+                    <input type="text" placeholder="Search.." id="search" name="searchCatagory">
+
+
+
+                                <button type="submit" name="search">Search</button>
+
+                        </div>
+
+
+                </form>
+                <div class="vdsa">
+                <h1><?php echo $content_catagory?></h1>
+
+                <div class="tnews">
+                    <div class="t_img">
+
+                    </div>
+                    <div class="tnews">
+                        <?php
+                              $tsql="Select * from content  ORDER BY extra DESC" ;
+                              $tresult= mysqli_query($con,$tsql);
+                              while($tdata=mysqli_fetch_assoc($tresult)){
+                            
+                                echo '<ul type="none">
+                                    <b><a href="content_highlight.php"?id='.$tdata['newsid'].'<li>'.$tdata['title'].'<b></a><li><ul>
+                                ';
+                              }
+
+                        ?>
+                    </div>
+                </div>
+        
+            </div>
+            
+        </div>
+            
+
+    </div>
            
             
 
-        </div>
+        
         <div class="mid">
             <div class="lmid">
                 

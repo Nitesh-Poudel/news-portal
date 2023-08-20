@@ -3,19 +3,19 @@
 include_once('databaseconnection.php');
 
    
-$task = isset($_SESSION['userid']) ? 'logout' : 'login';
+$task = isset($_SESSION['userid']) ?  "logout" :  "Login";
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<style>img{width:50px;}</style>
 <body>
 <div class="head">
         <div class="heading">
-              <h1><b>f</b>
+              <h1><b>E</b>
              
             <font color="red">.</font> 
-            <font family="times new roman"><span>कान्छिपुर<span></font>   
+            <font family="times new roman"><span>संचार<span></font>   
             </h1>
            
         </div>
@@ -34,7 +34,17 @@ $task = isset($_SESSION['userid']) ? 'logout' : 'login';
         <a  href="#">About us</a>
         <a  href="#">Contact us</a>
       </div>
-       
+
+
+       <div class="catagory">
+          <a href="newscatagory.php?catagory=politices">Politices</a>
+          <a href="newscatagory.php?catagory=socialissue">Social Issue</a>
+          <a href="newscatagory.php?catagory=sports">Sports</a>
+          <a href="newscatagory.php?catagory=business">BUsiness</a>
+      
+      
+       </div>
+
       <div class="advancelink">
         
         <?php 

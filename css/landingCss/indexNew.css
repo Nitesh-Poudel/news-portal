@@ -1,4 +1,6 @@
-
+.container ::-webkit-scrollbar {
+  width: 70px;
+}
 /*Body below heading*/
 .container{
     width:100%;
@@ -9,11 +11,19 @@
 }
 
 
+a{
+  text-decoration: none;
+  color:black;
+  
+ }
+
+
+
 
 /*left of page*/
 .left{
     width:20%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(236, 232, 232);
     margin:10px;
     border-radius: 10px;
     height:100vh;
@@ -53,37 +63,56 @@
    
   }
 
-  .container .left ul li{
-    padding-top:10px;
+
+  .container .left .left_container .tranding-list{
+    margin-top: 50px;
+    
   }
 
+  .container .left ul li h1{
+    margin-bottom: 10px;
+  }
+
+
+  .container .left ul li {
+    padding-top:20px;
+  }
+
+  .left_container{
+    
+    display: block;
+    
+    margin-left: 5px;
+  }
 
   /* container ko mid ko*/
 
   .mid{
-    background-color: rgb(252, 252, 252);
-    margin:10px;
-    width:78vw;
+    background-color: rgb(237, 232, 232);
+    
+    width:70vw;
     border-radius: 10px;
-    position: absolute;
+   
     left: 21%;
     height:100vh;
-    overflow: scroll;
+    ;
+    overflow-x: hidden;
     
   }
   
   .mid .heading{
-    display: ;
+    display: flex;
     width:100%;
     align-items: baseline;
     text-align: center;
     margin-right:20px;
-    border-bottom: 0.5px solid gray;
+    border-bottom:2px solid #ecebeb;
+ 
     
   }
 
   .mid .newscontent{
-    width:90%;
+    width:100%;
     display:block;
     margin-left: auto;;
     margin-right: auto;
@@ -96,6 +125,9 @@
     margin:20px;
     
   }
+
+
+ 
   .mid .heading a{
    
    text-decoration: none;
@@ -105,8 +137,9 @@
 
   .mid  .headimg{
    
-    height:80vh;
+    height:70vh;
     overflow:hidden;
+   
   }
 
 
@@ -166,10 +199,6 @@
 
 .topnews .topnews_news p{
   margin-top:20px;
- }
- a{
-  text-decoration: none;
-  color:black;
  }
 
 
