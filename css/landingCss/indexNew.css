@@ -1,11 +1,16 @@
 .container ::-webkit-scrollbar {
   width: 70px;
 }
+
+
 /*Body below heading*/
 .container{
+
     width:100%;
-    display:flex;height:100vh;
-    overflow: hidden;
+    display:flex;height:auto;
+   
+    align-items: center;
+    jutify-content: center;
    
 
 }
@@ -18,17 +23,18 @@ a{
  }
 
 
-
+.container{background-color: rgb(249, 249, 250);}
 
 /*left of page*/
 .left{
-    width:20%;
-    background-color: rgb(236, 232, 232);
+    width:300px;
+  
     margin:10px;
     border-radius: 10px;
     height:100vh;
     position:sticky;
     top:0;
+    box-shadow:5px 3px 18px 0px #000000;
 
 }
 
@@ -71,44 +77,58 @@ a{
 
   .container .left ul li h1{
     margin-bottom: 10px;
+    border-bottom: 1px solid rgb(167, 167, 167);
   }
 
 
   .container .left ul li {
     padding-top:20px;
+    border-bottom: 1px solid rgb(167, 167, 167);
   }
 
   .left_container{
     
     display: block;
-    
-    margin-left: 5px;
   }
+  .left .tnews{,nmargin-left:10px;}
 
   /* container ko mid ko*/
 
   .mid{
-    background-color: rgb(237, 232, 232);
+    display: flex;
+    padding:20px;
+    padding-left:50px;
+    padding-right: auto;
     
-    width:70vw;
-    border-radius: 10px;
+    width:70%;
+    
    
     left: 21%;
     height:100vh;
-    ;
+  
     overflow-x: hidden;
     
   }
   
-  .mid .heading{
-    display: flex;
+  .mid .headimg{
+    
     width:100%;
-    align-items: baseline;
+    align-items:center;
     text-align: center;
     margin-right:20px;
-    border-bottom:2px solid #ecebeb;
+    border-bottom:3px solid #cdc3c3;
  
     
+  }
+
+   
+  .mid  .headimg img{
+    width:80vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+
   }
 
   .mid .newscontent{
@@ -117,11 +137,13 @@ a{
     margin-left: auto;;
     margin-right: auto;
     margin-top:20px;
+   
+   
   }
   .mid .heading h1{
    
     text-align: center;
-    font-size: 90px;
+    font-size: 4vw;
     margin:20px;
     
   }
@@ -131,16 +153,12 @@ a{
   .mid .heading a{
    
    text-decoration: none;
+   
     
   }
 
 
-  .mid  .headimg{
-   
-    height:70vh;
-    overflow:hidden;
-   
-  }
+
 
 
   .mid .heading p{
@@ -150,38 +168,33 @@ a{
    
   }
 
- 
-  .mid  .headimg img{
-    width:90%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
+  .mathiko{padding:20px; box-shadow:5px 8px 8px 0px #000000;}
 
-  }
+  
 
 
 
   /*top news vanney div*/
   .topnews{
     display:flex;
-   margin:10px;
+ 
     margin-top:50px;
     align-items: center;
-    background-color: rgb(255, 255, 255);
+   
     border-radius: 8px;
     width:100%;
+    box-shadow:5px 3px 18px 0px #000000;
    
 }
 .topnews:hover{
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(244, 242, 242);
 }
 
 
 .topnews .topnewsimg{
   padding:10px;
   width:25%;
-  overflow: hidden;
+ 
  
 }
 
@@ -190,6 +203,7 @@ a{
   height:30vh;
   overflow:hidden;
   margin:10px;
+  text-overflow: ellipsis;
 }
 .topnews .topnews_news h5{
  font-size: 2vw;

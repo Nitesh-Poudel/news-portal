@@ -62,7 +62,7 @@ else{
                 VALUES ('$title', '$category', '$content', '$newname', '".$_SESSION['userid']."', '$Date')";
         
               
-                $qry=mysqli_query($con,$sql);
+                $qry=mysqli_query($con->getConnection(),$sql);
                 if($qry){
                     header("landing.php");
                 }
@@ -95,7 +95,7 @@ else{
 
 <body>
     <?php
-        include_once('heading.php');
+        include_once('header.php');
     ?>
     <div class="container">
     

@@ -1,17 +1,17 @@
 
 
 <?php
-
+    session_start();
  include_once('databaseconnection.php');
 
 
 if(isset($_GET['id'])){
     $contentid = $_GET['id'];
-    $content_catagory=$_GET['catagory'];
+    $content_catagory='News';
   
    
     $sql = "SELECT * FROM content  WHERE newsid = $contentid";
-    $qry = mysqli_query($con, $sql);
+    $qry = mysqli_query($con->getConnection(), $sql);
 
     if($qry) {
 
@@ -21,7 +21,7 @@ if(isset($_GET['id'])){
         $result = mysqli_fetch_assoc($qry);
 
         $trendsql = "UPDATE content SET extra = extra + 1 WHERE newsid = $contentid";
-        $trendqry = mysqli_query($con, $trendsql);
+        $trendqry = mysqli_query($con->getConnection(), $trendsql);
     } else {
         echo 'Error retrieving content from the database.';
     }
@@ -38,16 +38,12 @@ if(isset($_GET['id'])){
 
 
 <?php
-    if(isset($_POST['cmt'])){
+    if(isset($_POST['comment'])){
         include_once('session.php');
 
         if(isset($_SESSION['userid'])){
         $comment=$_POST['comment'];
-        if($comment!=''){
-            
-                
-                
-                
+            if($comment!=''){
                 $Date=date(" Y M d ");
                 $time=time();
                 $user=$_SESSION['userid'];
@@ -64,12 +60,7 @@ if(isset($_GET['id'])){
                 else{
                     echo "Comment unsucess";
                 }
-            
-            
-                
-            
-                
-        }
+            }
         else{
             echo "Enter comment";
         }
@@ -94,188 +85,117 @@ if(isset($_GET['id'])){
     <title><?php echo $result['title'];?></title>
 
 
-    <link rel="stylesheet" a href="css/landingCss/master.css">
+    
     <link rel="stylesheet" a href="css/landingCss/head.css">
-    <link rel="stylesheet" a href="csss/landingCss/container.css">
-    <link rel="stylesheet" a href="csss/landingCss/content.css">
-    <link rel="stylesheet" a href="css/landingCss/dash_left.css">
-    <link rel="stylesheet" a href="css/content_highlight.css">
     <link rel="stylesheet" a href="css/landingCss/Indexnew.css">
+    <link rel="stylesheet" a href="css/landingCss/content_highlight.php">
+   
+<style>
+    body{height:auto}
+    .content-container{box-shadow:5px 3px 18px 0px #000000;width:90%;display:flex;flex-direction:column;align-items:center;overflow:scroll;padding:0px;height:100vh;border-radius:10px}
+    
+
+    .newsarticle{width:90%;box-shadow:5px 3px 18px 0px #000000;margin-top:0px}
+    .content-heading{width:100%;overflow:hidden; text-overflow: ellipsis;word-wrap: break-word;margin-top:75px}
+    .content-heading{font-size:45px;height:auto;border-radius:8px;text-align:center}
+    .content-image{width:100%;overflow:hidden;border:1px solid #aca8a8;;margin:20px 0px;display:flex;justify-content:center}
+    .content-image img{width:50%;display:flex;justify-items:center;margin:10px;border-radius:5px}
+    .content-news{margin:20px}
 
 
-    <style>
-        .textarea {
-        height: 300px; /* Adjust the height as needed */
-        resize: vertical; /* Allows vertical resizing */
-        }
-        .mid .heading {
-    display: block;
-    width: 100%;
-    align-items: baseline;
-    text-align: center;
-    margin-right: 20px;
-    border-bottom: 2px solid #ecebeb;
+    .commentSection{width:100%;box-shadow:5px 3px 18px 0px #000000;height:100px;margin-top:80px;display:flex;flex-direction:column;juhstify-content:center;padding-top:30px;align-items:center;}
+    .docomment{width:90%;height:100px;}
+    form{margin:20px auto}
+    #comment{width: 85%;
+        padding: 10px 0px; 
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+        margin-bottom: 10px; 
+        font-size: 16px;
+        outline: none; 
+    }
+    #cmtbutton{ padding: 10px 5px; }
+    button{padding:0px 5px;}
 
-}
+    .seecomment{width:100%;height:500px;padding-top:50px;text-align:enter}
+    .seecomment li{width:100%;padding-top:10px;}
+
+
     </style>
+ 
 </head>
 <body>
-    <?php include_once('heading.php');?>
+ 
     
-    <div class="container">
-       
-        <div class="left">
-            
-
-            <div class="left_container">
-                <form method="POST" name="search">
-                    <div class="searchmenue">
-
-                    <input type="text" placeholder="Search.." id="search" name="searchCatagory">
-
-
-
-                                <button type="submit" name="search">Search</button>
-
-                        </div>
-
-
-                </form>
-                <div class="vdsa">
-                <h1><?php echo $content_catagory?></h1>
-
-                <div class="tnews">
-                    <div class="t_img">
-
-                    </div>
-                    <div class="tnews">
-                        <?php
-                              $tsql="Select * from content  ORDER BY extra DESC" ;
-                              $tresult= mysqli_query($con,$tsql);
-                              while($tdata=mysqli_fetch_assoc($tresult)){
-                            
-                                echo '<ul type="none">
-                                    <b><a href="content_highlight.php"?id='.$tdata['newsid'].'<li>'.$tdata['title'].'<b></a><li><ul>
-                                ';
-                              }
-
-                        ?>
-                    </div>
-                </div>
-        
-            </div>
-            
-        </div>
-            
-
-    </div>
+    <?php 
+            include_once('header.php');
+            include_once('left.php')
+        ?>
            
+        <div class="content-container">
+                <div class="newsarticle">
+                    <div class="content-heading"><b><?php echo$result['title']?><b></div>
+                    <div class="content-image"><img src="Newsimage/<?php echo$result['imgsrc']?>" alt=""></div>
+                    <div class="content-news"><p><?php echo$result['content']?><p/></div>
+                    <div class="commentSection">
+                        <div class="docomment">
+                            <form action="POST">
+                                <button type="submit" name="like">Like</button>
+                                <label for="comment">Comment</label><br>
+                                <input type="text" id="comment"name="comment">
+                                <button type="submit" name="comment" id="cmtbutton">Comment</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="seecomment">
+                        <h1>COMMENTS</h1>
+                        <ul type="none">
+                        <?php
+                            $contentid = $_GET['id'];
+                            $seeqry=mysqli_query($con->getConnection(),"SELECT * from comment c JOIN users u ON c.user_id=u.id WHERE news_id=$contentid");
+
+                            while($comments=mysqli_fetch_assoc($seeqry)){
+                                echo
+                                
+                                '<li> <b>'.$comments['name'].'</b>'.$comments['comments'].'</li>';
+                                   
+                                  
+                                
+                            }
+                                
+                            
+                        ?>
+                      </ul>
+
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+                
+
+
             
 
-        
-        <div class="mid">
-            <div class="lmid">
-                
-            </div>
-            <div class="mmid">
-                <div class="heading">
-                    <h1><?php echo $result['title'];?></h1>
-                    <p><?php echo $result['date'];?></p>
-                    <h3 id="content"><?php echo $result['content'];?>"</h3>
-                </div>
+        </div>       
+
+
+
+
                
-                <div class="headimg">
-                    
-                   <img src="Newsimage/<?php echo $result['imgsrc'];?>">
-                   
-                  
-                </div>
-                
-
-                <form method="POST" name="commentform">
-                    <div class="commentSection">
-                        <div class="commentbox">
-                        <textarea placeholder="Comment" class="inputs textarea" name="comment" required></textarea><br>
-               
-                        </div>
-                        <div class="button">
-
-                            <div class="like">
-                                <a href="like.php">like</a>
-                            </div>
-
-
-                            <div class="commentbutton">
-                                <button type="submit" name="cmt">Comment</button>
-                            </div>
-
-                          
-
-                        </div>
-                    </div>
-                </form>
-
-
-
-
-                <div class="comment_list">
-                    <h1 style="fontsize:26px;">Comments</h1>
-                    <div class="comment_list">
-
-                        <?php
-                            $cmtsql= "SELECT * FROM comment WHERE news_id = $contentid";
-                            $commentQuery = mysqli_query($con,$cmtsql);
-                            if (mysqli_num_rows($commentQuery) > 0) {
-                                while ($commentResult = mysqli_fetch_assoc($commentQuery)) {
-                                    $userId = $commentResult['user_id'];
-                                    $userQuery = mysqli_query($con, "SELECT name FROM users WHERE id = $userId");
-                                    $userResult = mysqli_fetch_assoc($userQuery);
-                                    $comment = $commentResult['comments'];
-                                    $time = $commentResult['time'];
-                                    $formattedTime = date('Y-m-d H:i:s', $time);
-                            ?>
-                                    <div class="comment">
-                                        <div class="cmtr_name"><p><?php echo $userResult['name']; ?></p></div>
-                                        <div class="cmt"><p><?php echo $comment; ?></p></div>
-                                        <div class="cmt_date"><p><?php echo $formattedTime; ?></p></div>
-                                    </div>
-                            <?php
-                                }
-                            } else {
-                                echo "No comments found.";
-                            }
-                        ?>
-                    </div>
-
-                   
-                </div>
-            </div>
+            
         
-            <div class="rmid">
-                
-            </div>
-
-        </div>
-        <div class="right">
-
-        </div>
-    </div>
+       
+        
+    
+                        
    
 
-    <script>
-        // Define the function to update the time
-        function updateTime() {
-            var now = new Date();
-            var todaydate = document.getElementById("date");
-            var nowtime = document.getElementById("time");
-
-            todaydate.innerHTML = now.toDateString();
-            nowtime.innerHTML = now.toLocaleTimeString();
-        }
-
-        // Call the updateTime() function every second
-        setInterval(updateTime, 1000);
-    </script>
+    
 </body>
 </html>
 

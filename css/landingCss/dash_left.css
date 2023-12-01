@@ -1,12 +1,13 @@
 /*left of page*/
 .left{
-  width:20%;
-  background-color: antiquewhite;
+  width:200px;
+  background-color: rgb(241, 239, 236);
   margin:10px;
   border-radius: 10px;
   height:100vh;
   position:sticky;
   top:0;
+  box-shadow:5px 3px 18px 0px #000000;
 
 }
 

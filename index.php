@@ -2,11 +2,11 @@
     session_start();
     include_once('databaseconnection.php');
    
-    
+   
 
     $sql='';$result='';$data='';
     $sql="Select * from content ORDER BY newsid DESC" ;
-    $result= mysqli_query($con,$sql);
+    $result= mysqli_query($con->getConnection(),$sql);
     $data= mysqli_fetch_assoc($result);
 
 
@@ -14,8 +14,8 @@
     $newscatagory=$_POST['searchCatagory'];
     if($newscatagory!=''){
         $sql="SELECT * FROM content
-WHERE title LIKE '%$newscatagory'"; 
- $result= mysqli_query($con,$sql);
+            WHERE title LIKE '%$newscatagory'"; 
+            $result= mysqli_query($con->getConnection(),$sql);
         $data= mysqli_fetch_assoc($result);
 
             if(!$data){
@@ -45,77 +45,35 @@ WHERE title LIKE '%$newscatagory'";
 
     <link rel="stylesheet" a href="css/landingCss/head.css">
 
-    <link rel="stylesheet" a href="csss/landingCss/content.css">
+   
 
     <link rel="stylesheet" a href="css/landingCss/Indexnew.css">
    
 </head>
 <body>
-    <?php include_once('heading.php')?>
-
-
-    
-    <div class="container">
-        <div class="left">
+        <?php 
+            include_once('header.php');
+            include_once('left.php');
             
+     
+            ?>
 
-            <div class="left_container">
-                <form method="POST" name="search">
-                    <div class="searchmenue">
-
-                    <input type="text" placeholder="Search.." id="search" name="searchCatagory">
-
-
-
-                                <button type="submit" name="search">Search</button>
-
-                        </div>
-
-
-                </form>
-                <div class="tranding-list">
-                <h1>Tranding News</h1>
-
-                <div class="tnews">
-                    <div class="t_img">
-
-                    </div>
-                    <div class="tnews">
-                        <?php
-                              $tsql="Select * from content  ORDER BY extra DESC" ;
-                              $tresult= mysqli_query($con,$tsql);
-                              while($tdata=mysqli_fetch_assoc($tresult)){
-                            
-                                echo '<ul type="none">
-                                <li>
-                                    <a href="content_highlight.php?id=' .$tdata['newsid'] . '">' . $tdata['title'] . '</a>
-                                </li>
-                            </ul>';
-                              }
-
-                        ?>
-                    </div>
-                </div>
         
-            </div>
-            
-        </div>
-            
-
-    </div>
+    
+          
         <div class="mid">
-            
+             
             <div class="mmid">
-                
-                    <a href="<?php echo'content_highlight.php?id='.$data['newsid']?>">
+                <div class="mathiko">
                         <div class="heading">
+                            <a href="<?php echo'content_highlight.php?id='.$data['newsid']?>
                             <h1><?php echo $data['title'];?></h1>
                             <p><?php echo $data['date'];?></p>
                         </div>
                         <div class  ="newscontent">
                             <h3>
                                 <?php 
-                                    echo $data['content'];
+                                 
                                 ?>
                             </h3>
 
@@ -126,7 +84,8 @@ WHERE title LIKE '%$newscatagory'";
 
 
                         </div>
-                    </a>
+                </div>  
+
                 
                 
 
@@ -135,7 +94,7 @@ WHERE title LIKE '%$newscatagory'";
                     if(mysqli_num_rows($result) > 0){
                         while($data2 = mysqli_fetch_assoc($result)){
                             echo '
-                            <a href="content_highlight.php?id='.$data2['newsid'].'&catagory='.$data2['category'].'">
+                            <a href="content_highlight.php?catagory='.$data2['category'].'&id='.$data2['newsid'].'">
                                 
                                 <div class="topnews">
                                     <div class="topnewsimg">

@@ -13,7 +13,7 @@
         
         $sql="SELECT * from users WHERE email='$email'&& password='$encriptpw'";
         $msg;
-        $qry=mysqli_query($con,$sql);
+        $qry=mysqli_query($con->getConnection(),$sql);
         if($qry){
            $data= mysqli_fetch_assoc($qry);
           

@@ -5,30 +5,25 @@
 
 .head{
     background-color: rgb(255, 255, 255);
-   color:aliceblue;
+   color:rgb(5, 135, 249);
     display:flex;
     justify-content:space-between ;
     align-items: center;
-    padding-left: 20px;
-    
+    box-shadow:5px 3px 18px 0px #000000;
+   
+   
   
  
 }
 .head .heading{
     border: 0.2px solid gold;
     border-radius: 20px;
+   
+    
 
 }
-.head .heading {
-    font-size: 2vw;
-    color:rgb(5, 146, 99);
-    font-family:fantasy;
-    text-decoration:underline;
-    text-decoration-color: red;
-    padding-left:10px;
- 
-  
-}
+.dateTime{ margin:20px ;color:rgb(43, 24, 24);font-weight: 200;font-family:fantasy;}
+
 
 .head .heading #tagline{
    font-size:20px;
@@ -44,28 +39,19 @@
 .links{
     display: flex;
     justify-content: space-between;
-    border: 3px rgb(158, 138, 138);
-    background-color: rgb(240 240 240);
     align-items: center;
-    font-style: bold;
-}
+    height:40px;
 
-.links .simplelink{
-    margin:5px;
+    border-top:1px solid rgb(226, 224, 224);
+    border-bottom:1px solid rgb(226, 224, 224);
+  
     
 }
+.links a{color:purple;text-decoration: underline;}
+
 
 .links  a{
     margin:25px;
     font-size: 20px;
-    
-}
-.links img{
-    width:80px;
-    height: 80px;
-    border-radius: 50%;
-
-}
-.advancelink{
     
 }
